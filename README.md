@@ -82,7 +82,7 @@ endpoints:
 | `title_prefix` | 标题前缀（可选），拼接后为 `[prefix] title` |
 | `title_path` | 从 JSON body 中提取 title，值为 JSON path，如 `.head_commit.message` |
 | `message_path` | 从 JSON body 中提取 message，值为 JSON path |
-| `level` | 通知级别（可选），`info`（蓝色，默认）/ `warn`（黄色）/ `error`（红色） |
+| `level` | 通知级别（可选），`info`（绿色，默认）/ `warn`（黄色）/ `error`（红色） |
 
 当请求携带 JSON body 但字段名不匹配时，调用方可通过 `title_path` / `message_path` 告诉 Hookline 从 body 的哪个字段取值。与直接传 `title` / `message` 互斥，`_path` 参数优先。
 
@@ -112,8 +112,8 @@ Endpoint 可配置 `token` 字段。启用后，请求必须携带正确的 toke
 
 | 渠道 | 类型标识 | 状态 |
 |------|----------|------|
-| Email | `email` | 计划中 |
-| Discord | `discord` | 计划中 |
+| Email | `email` | ✅ |
+| Discord | `discord` | ✅ |
 | Telegram | `telegram` | 计划中 |
 
 ## 响应格式
@@ -139,6 +139,5 @@ Endpoint 可配置 `token` 字段。启用后，请求必须携带正确的 toke
 ## 技术栈
 
 - **语言**: Rust
-- **HTTP**: 标准库 (`std::net::TcpListener`)
 - **配置**: YAML (serde_yaml)
 - **异步运行时**: Tokio
