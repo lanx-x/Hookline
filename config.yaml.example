@@ -1,0 +1,26 @@
+server:
+  host: "0.0.0.0"
+  port: 8080
+
+channels:
+  - name: "discord"
+    type: discord
+    webhook_url: "https://discord.com/api/webhooks/..."
+    format: markdown
+
+  - name: "email"
+    type: email
+    smtp_host: "smtp.gmail.com"
+    smtp_port: 587
+    username: "hl"
+    password: "..."
+    from: "Hookline <hl@gmail.com>"
+    to: "homelab@gmail.com"
+    format: html
+
+endpoints:
+  - path: "/ntfy/demo"
+    token: "..."
+    channels:
+      - "discord"
+      - "email"

@@ -1,0 +1,15 @@
+services:
+  hookline:
+    build:
+      context: .  # 当前项目目录
+      dockerfile: Dockerfile
+    container_name: hookline
+    # 可选：设置环境变量或卷挂载
+    environment:
+      - RUST_LOG=info
+    volumes:
+      - ./config.yaml:/app/config.yaml
+    ports:
+      - 8080:8080
+    # 重启策略
+    restart: unless-stopped

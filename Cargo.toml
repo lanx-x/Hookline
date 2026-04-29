@@ -1,0 +1,20 @@
+[package]
+name = "hookline"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1", features = ["rt-multi-thread", "net", "io-util", "macros"] }
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+async-trait = "0.1"
+log = "0.4"
+env_logger = "0.11"
+http = "1"
+hyper = { version = "1", features = ["full"] }
+hyper-util = "0.1"
+http-body-util = "0.1"
+reqwest = { version = "0.12", default-features = false, features = ["json", "native-tls"] }
+bytes = "1"
+lettre = { version = "0.11", features = ["tokio1-native-tls", "builder"] }
