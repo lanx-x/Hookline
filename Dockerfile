@@ -1,5 +1,5 @@
 # 第一阶段：编译（使用 Alpine 以生成 musl 静态二进制）
-FROM rust:alpine as builder
+FROM rust:alpine AS builder
 
 WORKDIR /usr/src/app
 

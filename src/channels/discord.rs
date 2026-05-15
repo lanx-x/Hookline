@@ -1,4 +1,4 @@
-use crate::notification::{level_style, Notification};
+use crate::notification::{Notification, level_style};
 use async_trait::async_trait;
 
 use super::Channel;
@@ -30,13 +30,14 @@ impl Channel for DiscordChannel {
 
         let payload = serde_json::json!({
             "embeds": [{
-                "title": format!("{} {}", style.emoji, notification.title),
-                "description": notification.message,
+                "title": &notification.title,
+                "description": &notification.message,
                 "color": style.color
             }]
         });
 
-        let resp = self.client
+        let resp = self
+            .client
             .post(&self.webhook_url)
             .json(&payload)
             .send()
@@ -47,7 +48,6 @@ impl Channel for DiscordChannel {
             return Err(format!("discord api error: {}", resp.status()));
         }
 
-        log::info!("discord webhook sent");
         Ok(())
     }
 }

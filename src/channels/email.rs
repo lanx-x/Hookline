@@ -1,4 +1,4 @@
-use crate::notification::{level_style, Notification};
+use crate::notification::{Notification, level_style};
 use async_trait::async_trait;
 use lettre::message::header::ContentType;
 use lettre::{AsyncSmtpTransport, AsyncTransport, Message, Tokio1Executor};
@@ -58,10 +58,10 @@ impl Channel for EmailChannel {
 
         let style = level_style(&notification.level);
 
-        let subject = format!("{} [{}] {}", style.emoji, style.label, notification.title);
+        let subject = format!("[{}] {}", style.label, notification.title);
         let body = format!(
-            "<span style=\"display:inline-block;padding:2px 8px;border-radius:3px;background:{};color:#fff;font-weight:bold;font-size:12px\">{} {}</span>\n\n{}",
-            style.hex_color, style.emoji, style.label, notification.message
+            "<span style=\"display:inline-block;padding:2px 8px;border-radius:3px;background:{};color:#fff;font-weight:bold;font-size:12px\">{}</span>\n\n{}",
+            style.hex_color, style.label, notification.message
         );
 
         let email = Message::builder()
@@ -77,7 +77,10 @@ impl Channel for EmailChannel {
             .await
             .map_err(|e| format!("failed to send email: {e}"))?;
 
-        log::info!("email sent to {}", notification.to.as_deref().unwrap_or(&self.to));
+        log::info!(
+            "email sent to {}",
+            notification.to.as_deref().unwrap_or(&self.to)
+        );
         Ok(())
     }
 }

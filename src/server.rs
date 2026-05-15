@@ -32,6 +32,7 @@ pub async fn run(server_config: ServerConfig, endpoints: Vec<EndpointConfig>, ch
                 let channels = channels.clone();
                 async move {
                     let (parts, body) = req.into_parts();
+                    log::info!("{} {} {}", parts.method, parts.uri.path(), parts.uri.query().unwrap_or(""));
                     let body_bytes = http_body_util::BodyExt::collect(body)
                         .await
                         .map(|c| c.to_bytes())
